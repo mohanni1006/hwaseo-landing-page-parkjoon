@@ -107,7 +107,7 @@ window.addEventListener('DOMContentLoaded', function() {
 // =========================================================================
 // 🔒 [보안 설정] Cloudflare Workers 중계 엔드포인트
 // =========================================================================
-const PROXY_ENDPOINT = "https://honorsville-leesoojin-webhook.mohanni1006.workers.dev";
+const PROXY_ENDPOINT = "https://honorsville-parkjoon-webhook.mohanni1006.workers.dev";
 
 // Base64 분할 난독화 안전 복원 함수
 function getDecodedEndpoint(parts) {
@@ -135,9 +135,9 @@ const _sParts = [
   "dm1rdGJpbnpoeDRzMTR2c29jMWxzbWFudmo3cmdzcmE="
 ];
 
-// 7. 문자(SMS) 페이로드 생성 (담당 관리자: 010-3235-1004)
+// 7. 문자(SMS) 페이로드 생성 (담당 관리자: 010-8674-7249)
 function buildSmsPayload(data) {
-  const ADMIN_PHONE = "010-3235-1004";
+  const ADMIN_PHONE = "010-8674-7249";
   
   let smsMessage = `[아너스빌] ${data.name} ${data.phone}\n방문: ${data.visitDate} ${data.visitTime}\n타입: ${data.interest}`;
   if (data.memo && data.memo !== '없음') {
@@ -192,7 +192,7 @@ async function submitReservation(event) {
     username: "화서역 호수공원 아너스빌 알림봇",
     embeds: [
       {
-        title: "📢 [이수진] 신규 방문예약 접수 완료!",
+        title: "📢 [박준] 신규 방문예약 접수 완료!",
         color: 12951641,
         fields: [
           { name: "👤 고객 성함", value: `**${name}**`, inline: true },
@@ -204,7 +204,7 @@ async function submitReservation(event) {
           { name: "⏱ 접수 일시", value: submitTime, inline: false }
         ],
         footer: {
-          text: "화서역 호수공원 아너스빌 공식 분양홍보관 (대표문의: 010-3235-1004 / 수신: 010-3235-1004)"
+          text: "화서역 호수공원 아너스빌 공식 분양홍보관 (대표문의: 010-8674-7249 / 수신: 010-8674-7249)"
         }
       }
     ]
@@ -260,14 +260,14 @@ async function submitReservation(event) {
     }
 
     if (isSuccess) {
-      alert("방문 예약이 정상 접수되었습니다.\n담당자(이수진)가 예약 일시 확인 후 신속히 안내 연락드리겠습니다.");
+      alert("방문 예약이 정상 접수되었습니다.\n담당자(박준)가 예약 일시 확인 후 신속히 안내 연락드리겠습니다.");
       document.getElementById('consultForm').reset();
     } else {
-      alert("상담 예약 전송 중 일시적인 오류가 발생했습니다. 대표번호(010-3235-1004)로 문의해 주세요.");
+      alert("상담 예약 전송 중 일시적인 오류가 발생했습니다. 대표번호(010-8674-7249)로 문의해 주세요.");
     }
   } catch (err) {
     console.error("전송 처리 최종 오류:", err);
-    alert("네트워크 통신 오류가 발생했습니다.\n대표번호(010-3235-1004)로 연락 주시면 즉시 안내해 드리겠습니다.");
+    alert("네트워크 통신 오류가 발생했습니다.\n대표번호(010-8674-7249)로 연락 주시면 즉시 안내해 드리겠습니다.");
   } finally {
     submitBtn.disabled = false;
     submitBtn.innerText = '상담 예약 신청';
@@ -285,16 +285,16 @@ function toggleFloatingMenu(forceState) {
   }
 }
 
-// 10. 다이렉트 문자(SMS) 연결 (010-3235-1004 번호로 발송)
+// 10. 다이렉트 문자(SMS) 연결 (010-8674-7249 번호로 발송)
 function openDirectSms() {
-  const ADMIN_PHONE = "010-3235-1004";
+  const ADMIN_PHONE = "010-8674-7249";
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if (isMobile) {
     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
     const separator = isIOS ? '&' : '?';
     window.location.href = `sms:${ADMIN_PHONE}${separator}body=${encodeURIComponent('[화서역 호수공원 아너스빌] 상담 및 방문예약 문의합니다.')}`;
   } else {
-    alert(`모바일 기기에서 터치하시면 바로 문자(SMS) 전송 화면으로 연결됩니다.\n문자 상담 번호: ${ADMIN_PHONE}\n대표전화: 010-3235-1004`);
+    alert(`모바일 기기에서 터치하시면 바로 문자(SMS) 전송 화면으로 연결됩니다.\n문자 상담 번호: ${ADMIN_PHONE}\n대표전화: 010-8674-7249`);
   }
 }
 
